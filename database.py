@@ -10,7 +10,7 @@ st.markdown("""
    <style>
 /* === Background === */
 .stApp {
-    background-image: url("https://images.pexels.com/photos/360912/pexels-photo-360912.jpeg");
+    background-image: url("https://4kwallpapers.com/images/wallpapers/windows-11-dark-mode-abstract-background-black-background-3840x2160-8710.jpg");
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -32,10 +32,14 @@ st.markdown("""
 }
 
 /* === Labels and dropdown options === */
-label, div[data-testid="stSelectbox"] *, div[data-testid="stTextInput"] *,
-div[data-testid="stCheckbox"] *, div[data-testid="stMultiselect"] * {
+label,
+div[data-testid="stTextInput"] *,
+div[data-testid="stCheckbox"] *,
+div[data-testid="stMultiselect"] * {
     color: white !important;
     font-weight: bold !important;
+}
+
 }
 
 /* === Checkbox labels === */
@@ -85,6 +89,21 @@ h1, h2, h3, h4 {
     color: black !important;
 }
 
+/* Fix selected dropdown value (white text on white background) */
+div[data-baseweb="select"] > div {
+    color: black !important;
+}
+/* Make the selected text in dropdown visible */
+div[data-baseweb="select"] div[role="button"] {
+    color: black !important;
+}
+
+/* Make input text inside text_input fields black */
+input[type="text"] {
+    color: black !important;
+}
+
+
 </style>
 
 """, unsafe_allow_html=True)
@@ -120,7 +139,7 @@ if os.path.exists(UPLOAD_PATH):
         st.session_state.df_raw = None
         st.session_state.df_filtered = None
         st.session_state.df_calculated = None
-        st.experimental_rerun()
+        st.rerun()
 
 # Upload New File
 if not os.path.exists(UPLOAD_PATH):
@@ -129,7 +148,7 @@ if not os.path.exists(UPLOAD_PATH):
         with open(UPLOAD_PATH, "wb") as f:
             f.write(uploaded_file.read())
         st.session_state.file_loaded = True
-        st.experimental_rerun()
+        st.rerun()
 
 # Load from saved file
 if os.path.exists(UPLOAD_PATH) and st.session_state.df_raw is None:
